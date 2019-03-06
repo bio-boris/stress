@@ -4,6 +4,7 @@ import logging
 import os
 
 from installed_clients.KBaseReportClient import KBaseReport
+import time
 #END_HEADER
 
 
@@ -23,8 +24,8 @@ class stressTest:
     # the latter method is running.
     ######################################### noqa
     VERSION = "0.0.1"
-    GIT_URL = ""
-    GIT_COMMIT_HASH = ""
+    GIT_URL = "https://bio-boris@github.com/bio-boris/stress.git"
+    GIT_COMMIT_HASH = "de70bb2f6a585c5e74462a1fb2d301eb27dab948"
 
     #BEGIN_CLASS_HEADER
     #END_CLASS_HEADER
@@ -37,6 +38,7 @@ class stressTest:
         self.shared_folder = config['scratch']
         logging.basicConfig(format='%(created)s %(levelname)s: %(message)s',
                             level=logging.INFO)
+        self.report = KBaseReport(self.callback_url)
         #END_CONSTRUCTOR
         pass
 
@@ -51,20 +53,12 @@ class stressTest:
         # ctx is the context object
         # return variables are: output
         #BEGIN run_stressTest
-        report = KBaseReport(self.callback_url)
-
         cpu = params['cpu']
         memory = params['memory_mb']
-
         command = f"stress -c {cpu} -i 1 -m 1 --vm-bytes {memory}M -t 360s"
-        #
-        # import subprocess
-        # subprocess.check_output(command,shell=True)
+        time.sleep(1200)
 
-        import time
-        time.sleep(600)
-
-        report_info = report.create({'report': {'objects_created':[],
+        report_info = self.report.create({'report': {'objects_created':[],
                                                 'text_message': cpu + ":" +  memory + ":" + command},
                                                 'workspace_name': params['workspace_name']})
         output = {
@@ -76,6 +70,66 @@ class stressTest:
         # At some point might do deeper type checking...
         if not isinstance(output, dict):
             raise ValueError('Method run_stressTest return value ' +
+                             'output is not type dict as required.')
+        # return the results
+        return [output]
+
+    def run_stressTest2(self, ctx, params):
+        """
+        :param params: instance of mapping from String to unspecified object
+        :returns: instance of type "ReportResults" -> structure: parameter
+           "report_name" of String, parameter "report_ref" of String
+        """
+        # ctx is the context object
+        # return variables are: output
+        #BEGIN run_stressTest2
+        cpu = params['cpu']
+        memory = params['memory_mb']
+        command = f"stress -c {cpu} -i 1 -m 1 --vm-bytes {memory}M -t 360s"
+        time.sleep(1200)
+
+        report_info = self.report.create({'report': {'objects_created':[],
+                                                'text_message': cpu + ":" +  memory + ":" + command},
+                                                'workspace_name': params['workspace_name']})
+        output = {
+            'report_name': report_info['name'],
+            'report_ref': report_info['ref'],
+        }
+        #END run_stressTest2
+
+        # At some point might do deeper type checking...
+        if not isinstance(output, dict):
+            raise ValueError('Method run_stressTest2 return value ' +
+                             'output is not type dict as required.')
+        # return the results
+        return [output]
+
+    def run_stressTest3(self, ctx, params):
+        """
+        :param params: instance of mapping from String to unspecified object
+        :returns: instance of type "ReportResults" -> structure: parameter
+           "report_name" of String, parameter "report_ref" of String
+        """
+        # ctx is the context object
+        # return variables are: output
+        #BEGIN run_stressTest3
+        cpu = params['cpu']
+        memory = params['memory_mb']
+        command = f"stress -c {cpu} -i 1 -m 1 --vm-bytes {memory}M -t 360s"
+        time.sleep(1200)
+
+        report_info = self.report.create({'report': {'objects_created':[],
+                                                'text_message': cpu + ":" +  memory + ":" + command},
+                                                'workspace_name': params['workspace_name']})
+        output = {
+            'report_name': report_info['name'],
+            'report_ref': report_info['ref'],
+        }
+        #END run_stressTest3
+
+        # At some point might do deeper type checking...
+        if not isinstance(output, dict):
+            raise ValueError('Method run_stressTest3 return value ' +
                              'output is not type dict as required.')
         # return the results
         return [output]

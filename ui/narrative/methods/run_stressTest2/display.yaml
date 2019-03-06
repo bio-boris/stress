@@ -1,0 +1,43 @@
+#
+# define display information
+#
+name: Stress Test
+
+tooltip: |
+    Burn CPU/Memory
+
+screenshots: []
+
+icon: icon.png
+
+#
+# define a set of similar apps that might be useful to the user
+#
+suggestions:
+    apps:
+        related:
+            [app1, app2]
+        next:
+            [app3, app4]
+
+#
+# Configure the display and description of parameters
+#
+parameters :
+    cpu :
+        ui-name : |
+            CPU Param (# Cores)
+        short-hint : |
+            CPU Param (# Cores)
+        long-hint  : |
+            CPU Param (# Cores)
+    memory_mb :
+        ui-name : |
+            Memory Param (#Memory in MB)
+        short-hint : |
+            Memory Param (#Memory in MB)
+        long-hint  : |
+            Memory Param (#Memory in MB)
+
+description : |
+    <p> Test Memory </p>

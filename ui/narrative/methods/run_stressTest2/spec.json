@@ -1,0 +1,69 @@
+{
+    "ver": "0.0.1",
+    "authors": [
+        "bsadkhin"
+    ],
+    "contact": "",
+    "categories": ["active"],
+    "widgets": {
+        "input": null,
+        "output": null
+    },
+    "parameters": [ 
+        {
+            "id": "cpu",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "1" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        },
+        {
+            "id": "memory_mb",
+            "optional": true,
+            "advanced": false,
+            "allow_multiple": false,
+            "default_values": [ "1024" ],
+            "field_type": "text",
+            "text_options": {
+                "valid_ws_types": [ ]
+            }
+        }
+    ],
+    "behavior": {
+        "service-mapping": {
+            "url": "",
+            "name": "stressTest",
+            "method": "run_stressTest2",
+            "input_mapping": [
+                {
+                    "narrative_system_variable": "workspace",
+                    "target_property": "workspace_name"
+                },{
+                    "narrative_system_variable": "workspace_id",
+                    "target_property": "workspace_id"
+                },{
+                    "input_parameter": "cpu",
+                    "target_property": "cpu"
+                },
+                {
+                    "input_parameter": "memory_mb",
+                    "target_property": "memory_mb"
+                }
+            ],
+            "output_mapping": [
+                {
+                    "service_method_output_path": [0,"report_name"],
+                    "target_property": "report_name"
+                },{
+                    "service_method_output_path": [0,"report_ref"],
+                    "target_property": "report_ref"
+                }
+            ]
+        }
+    },
+    "job_id_output_field": "docker"
+}

@@ -12,5 +12,7 @@ module stressTest {
         This example function accepts any number of parameters and returns results in a KBaseReport
     */
     funcdef run_stressTest(mapping<string,UnspecifiedObject> params) returns (ReportResults output) authentication required;
+    funcdef run_stressTest2(mapping<string,UnspecifiedObject> params) returns (ReportResults output) authentication required;
+    funcdef run_stressTest3(mapping<string,UnspecifiedObject> params) returns (ReportResults output) authentication required;
 
 };

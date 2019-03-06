@@ -342,6 +342,14 @@ class Application(object):
                              name='stressTest.run_stressTest',
                              types=[dict])
         self.method_authentication['stressTest.run_stressTest'] = 'required'  # noqa
+        self.rpc_service.add(impl_stressTest.run_stressTest2,
+                             name='stressTest.run_stressTest2',
+                             types=[dict])
+        self.method_authentication['stressTest.run_stressTest2'] = 'required'  # noqa
+        self.rpc_service.add(impl_stressTest.run_stressTest3,
+                             name='stressTest.run_stressTest3',
+                             types=[dict])
+        self.method_authentication['stressTest.run_stressTest3'] = 'required'  # noqa
         self.rpc_service.add(impl_stressTest.status,
                              name='stressTest.status',
                              types=[dict])
